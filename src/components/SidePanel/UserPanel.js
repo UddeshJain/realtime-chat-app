@@ -40,13 +40,13 @@ class UserPanel extends React.Component {
                 <Grid.Column>
                     <Grid.Row style={{ padding: '1.2em', margin: 0 }}>
                         <Header inverted floated='left' as='h2'>
-                            <Icon name='code' />
+                            <Icon name="code" />
                             <Header.Content>DevChat</Header.Content>
                         </Header>
                         <Header style={{ padding: '0.25em' }} as='h4' inverted>
                             <Dropdown trigger={
                                 <span>
-                                    <Image src={user.photoUrl} spaced="right" avatar />
+                                    <Image src='http://gravatar.com/avatar/b642b4217b34b1e8d3bd915fc65c4452?d=identicon' spaced="right" avatar />
                                     {user.displayName}
                                 </span>
                             } options={this.dropdownOptions()} />
