@@ -1,11 +1,12 @@
 import React from "react";
 import firebase from "../../firebase";
+import { connect } from "react-redux";
+import { setCurrentChannel, setPrivateChannel } from "../../actions";
 import { Menu, Icon } from "semantic-ui-react";
-import { connect } from 'react-redux';
-import { setCurrentChannel, setPrivateChannel } from '../../actions';
 
 class DirectMessages extends React.Component {
     state = {
+        activeChannel: "",
         user: this.props.currentUser,
         users: [],
         usersRef: firebase.database().ref("users"),
@@ -18,6 +19,16 @@ class DirectMessages extends React.Component {
             this.addListeners(this.state.user.uid);
         }
     }
+
+    componentWillUnmount() {
+        this.removeListeners();
+    }
+
+    removeListeners = () => {
+        this.state.usersRef.off();
+        this.state.presenceRef.off();
+        this.state.connectedRef.off();
+    };
 
     addListeners = currentUserUid => {
         let loadedUsers = [];
@@ -68,7 +79,7 @@ class DirectMessages extends React.Component {
 
     isUserOnline = user => user.status === "online";
 
-    changeChanel = user => {
+    changeChannel = user => {
         const channelId = this.getChannelId(user.uid);
         const channelData = {
             id: channelId,
@@ -77,16 +88,18 @@ class DirectMessages extends React.Component {
         this.props.setCurrentChannel(channelData);
         this.props.setPrivateChannel(true);
         this.setActiveChannel(user.uid);
-    }
+    };
 
     getChannelId = userId => {
         const currentUserId = this.state.user.uid;
-        return userId < currentUserId ? `${userId}/${currentUserId}` : `${currentUserId}/${userId}`;
-    }
+        return userId < currentUserId
+            ? `${userId}/${currentUserId}`
+            : `${currentUserId}/${userId}`;
+    };
 
     setActiveChannel = userId => {
         this.setState({ activeChannel: userId });
-    }
+    };
 
     render() {
         const { users, activeChannel } = this.state;
@@ -103,7 +116,7 @@ class DirectMessages extends React.Component {
                     <Menu.Item
                         key={user.uid}
                         active={user.uid === activeChannel}
-                        onClick={() => this.changeChanel(user)}
+                        onClick={() => this.changeChannel(user)}
                         style={{ opacity: 0.7, fontStyle: "italic" }}
                     >
                         <Icon
@@ -118,4 +131,7 @@ class DirectMessages extends React.Component {
     }
 }
 
-export default connect(null, {setCurrentChannel, setPrivateChannel})(DirectMessages);
+export default connect(
+    null,
+    { setCurrentChannel, setPrivateChannel }
+)(DirectMessages);
