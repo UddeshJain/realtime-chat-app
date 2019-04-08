@@ -5,7 +5,8 @@ import {
     Header,
     Icon,
     Image,
-    List
+    List,
+    Button
 } from "semantic-ui-react";
 
 class MetaPanel extends React.Component {
@@ -92,6 +93,20 @@ class MetaPanel extends React.Component {
                         </Header>
                     </Accordion.Content>
                 </Accordion>
+
+                <Segment>
+                    <Header>FOLLOW US</Header>
+                    <a href='https://www.facebook.com/uddesh.jain.5' target='blank'>
+                        <Button color='facebook'>
+                            <Icon name='facebook' /> Facebook
+                        </Button>
+                    </a>
+                    <a target='blank' href='https://twitter.com/Uddesh_'>
+                        <Button color='twitter'>
+                            <Icon name='twitter' /> Twitter
+                        </Button>
+                    </a>
+                </Segment>
             </Segment>
         );
     }

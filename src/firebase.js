@@ -5,12 +5,12 @@ import 'firebase/storage';
 
 
 var config = {
-    apiKey: "AIzaSyDUvLfI8hVBCh4P--LLtAerPn0bDop2goM",
-    authDomain: "realtime-chat-app88.firebaseapp.com",
-    databaseURL: "https://realtime-chat-app88.firebaseio.com",
-    projectId: "realtime-chat-app88",
-    storageBucket: "realtime-chat-app88.appspot.com",
-    messagingSenderId: "917157966955"
+    apiKey: "Put your api key of firebase",
+    authDomain: "Put link of auth domain here",
+    databaseURL: "Put your database url here",
+    projectId: "project id from firebase goes here",
+    storageBucket: "Storage bucket from firebase goes here",
+    messagingSenderId: "Here goes message sender id, it will bw a number"
 };
 firebase.initializeApp(config);
 
